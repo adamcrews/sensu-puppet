@@ -44,11 +44,6 @@ Puppet::Type.newtype(:sensu_api_config) do
     defaultto '0.0.0.0'
   end
 
-  newparam(:base_path) do
-    desc "The base path to the client config file"
-    defaultto '/etc/sensu/conf.d/'
-  end
-
   newproperty(:user) do
     desc "The username used for clients to authenticate against the Sensu API"
   end

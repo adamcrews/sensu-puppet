@@ -8,20 +8,16 @@ Puppet::Type.type(:sensu_client_subscription).provide(:json) do
     super
 
     begin
-      @conf = JSON.parse(File.read(config_file))
+      @conf = JSON.parse(File.read("/etc/sensu/conf.d/subscription_#{resource[:name]}.json"))
     rescue
       @conf = {}
     end
   end
 
   def flush
-    File.open(config_file, 'w') do |f|
+    File.open("/etc/sensu/conf.d/subscription_#{resource[:name]}.json", 'w') do |f|
       f.puts JSON.pretty_generate(@conf)
     end
-  end
-
-  def config_file
-    "#{resource[:base_path]}/subscription_#{resource[:name]}.json"
   end
 
   def create

@@ -6,14 +6,14 @@ Puppet::Type.type(:sensu_redis_config).provide(:json) do
 
   def conf
     begin
-      @conf ||= JSON.parse(File.read(config_file))
+      @conf ||= JSON.parse(File.read('/etc/sensu/conf.d/redis.json'))
     rescue
       @conf ||= {}
     end
   end
 
   def flush
-    File.open(config_file, 'w') do |f|
+    File.open('/etc/sensu/conf.d/redis.json', 'w') do |f|
       f.puts JSON.pretty_generate(conf)
     end
   end
@@ -22,10 +22,6 @@ Puppet::Type.type(:sensu_redis_config).provide(:json) do
     conf['redis'] = {}
     self.port = resource[:port]
     self.host = resource[:host]
-  end
-
-  def config_file
-    "#{resource[:base_path]}/redis.json"
   end
 
   def destroy

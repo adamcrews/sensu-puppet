@@ -6,14 +6,14 @@ Puppet::Type.type(:sensu_rabbitmq_config).provide(:json) do
 
   def conf
     begin
-      @conf ||= JSON.parse(File.read(config_file))
+      @conf ||= JSON.parse(File.read('/etc/sensu/conf.d/rabbitmq.json'))
     rescue
       @conf ||= {}
     end
   end
 
   def flush
-    File.open(config_file, 'w') do |f|
+    File.open('/etc/sensu/conf.d/rabbitmq.json', 'w') do |f|
       f.puts JSON.pretty_generate(conf)
     end
   end
@@ -77,10 +77,6 @@ Puppet::Type.type(:sensu_rabbitmq_config).provide(:json) do
     else
       (conf['rabbitmq']['ssl'] ||= {})['cert_chain_file'] = value
     end
-  end
-
-  def config_file
-    "#{resource[:base_path]}/rabbitmq.json"
   end
 
   def port
