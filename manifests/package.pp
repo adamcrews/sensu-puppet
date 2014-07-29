@@ -46,13 +46,13 @@ class sensu::package {
     require => Package['sensu'],
   }
 
-  file { ['/etc/sensu/plugins', '/etc/sensu/handlers']:
-    ensure  => directory,
-    mode    => '0555',
-    owner   => 'sensu',
-    group   => 'sensu',
-    require => Package['sensu'],
-  }
+  #file { ['/etc/sensu/plugins', '/etc/sensu/handlers']:
+  #  ensure  => directory,
+  #  mode    => '0555',
+  #  owner   => 'sensu',
+  #  group   => 'sensu',
+  #  require => Package['sensu'],
+  #}
 
   if $sensu::manage_user {
     user { 'sensu':
@@ -69,5 +69,7 @@ class sensu::package {
     }
   }
 
-  file { '/etc/sensu/config.json': ensure => absent }
+  file { '/etc/sensu/config.json':
+    ensure => absent,
+  }
 }
