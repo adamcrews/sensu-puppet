@@ -29,8 +29,7 @@ Puppet::Type.type(:sensu_client_config).provide(:json) do
   end
 
   def config_file
-    #"#{resource[:base_path]}/client.json"
-    "/etc/sensu/conf.d/client.json"
+    "#{resource[:base_path]}/client.json"
   end
 
   def create

@@ -50,7 +50,7 @@ Puppet::Type.newtype(:sensu_client_config) do
 
   newparam(:base_path) do
     desc "The base path to the client config file"
-    defaultto '/etc/sensu/conf.d'
+    defaultto '/etc/sensu/conf.d/'
   end
 
   newproperty(:safe_mode, :boolean => true) do
