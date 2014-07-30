@@ -2,7 +2,7 @@ require 'puppet/provider/package'
 require 'uri'
 
 # Ruby gems support.
-Puppet::Type.type(:package).provide :pe_gem, :parent => :gem do
+Puppet::Type.type(:package).provide :sensu_gem, :parent => :gem do
   desc "Sensu Embedded Ruby Gem support. If a URL is passed via `source`, then
     that URL is used as the remote gem repository; if a source is present but is
     not a valid URL, it will be interpreted as the path to a local gem file.  If
